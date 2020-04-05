@@ -1,0 +1,19 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: nacos-provide
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+security:
+  oauth2:
+    resource:
+      user-info-uri:  http://localhost:8003/auth/user
+      prefer-token-info: false
+      loadBalanced: true

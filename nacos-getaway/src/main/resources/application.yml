@@ -1,0 +1,33 @@
+server:
+  port: 8003
+spring:
+  application:
+       name: nacos-getaway
+  cloud:
+      nacos:
+       discovery:
+        server-addr: 127.0.0.1:8848
+      gateway:
+        discovery:
+          locator:
+            enabled: true
+            lower-case-service-id: true
+        routes:
+          - id: nacos-getway-provider
+            uri: lb://nacos-provide
+            predicates:
+                  - Path=/provider/**
+            filters:
+              - StripPrefix=1
+          - id: nacos-getway-consumer
+            uri: lb://nacos-consumer
+            predicates:
+                  - Path=/consumer/**
+            filters:
+              - StripPrefix=1
+          - id: nacos-getway-auth
+            uri: lb://nacos-auth
+            predicates:
+              - Path=/auth/**
+            filters:
+              - StripPrefix=1

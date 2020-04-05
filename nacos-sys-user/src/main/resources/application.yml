@@ -1,0 +1,67 @@
+server:
+  port: 8005
+#表明使用Druid连接池
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+#mysql数据库连接信息配置
+#mysql驱动
+    driverClassName: com.mysql.jdbc.Driver
+#数据库连接信息
+    url: jdbc:mysql://localhost:3306/nacos_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+#数据库用户名
+    username: root
+#数据库密码
+    password: 123456
+#初始化时建立物理连接的个数。
+    druid:
+      initial-size: 5
+#最大连接池数量
+      max-active: 20
+#最小连接池数量
+      min-idle: 5
+#获取连接时最大等待时间，单位毫秒
+      max-wait: 3000
+#是否缓存preparedStatement，也就是PSCache,PSCache对支持游标的数据库性能提升巨大，比如说oracle,在mysql下建议关闭。
+      pool-prepared-statements: false
+#要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      max-open-prepared-statements: -1
+#配置检测可以关闭的空闲连接间隔时间
+      time-between-eviction-runs-millis: 60000
+# 配置连接在池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      max-evictable-idle-time-millis: 400000
+#监控统计的stat,以及防sql注入的wall
+      filters: stat,wall
+#Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      aop-patterns: com.web.springbootdruid.service.*
+#是否启用StatViewServlet默认值true
+      stat-view-servlet:
+         enabled: true
+#访问路径为/druid时，跳转到StatViewServlet
+         url-pattern: /druid/*
+# 是否能够重置数据
+         reset-enable: false
+# 需要账号密码才能访问控制台，默认为root
+         login-username: druid
+         login-password: druid
+#IP白名单
+         allow: 127.0.0.1
+#　IP黑名单（共同存在时，deny优先于allow）
+         deny:
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  type-aliases-package: com.nacos.sys.user.entity #扫描实体类,配置xml的别名
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 主键类型  AUTO:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: id_worker
+      # 字段策略 IGNORED:"忽略判断",not_null:"非 NULL 判断"),not_empty:"非空判断"
+      field-strategy: not_empty
+      #逻辑删除配置
+      logic-delete-value: -1
+      logic-not-delete-value: 0
