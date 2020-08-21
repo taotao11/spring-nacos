@@ -1,55 +1,39 @@
 package com.nacos.sys.user.entity;
 
+import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
  *
  * </p>
  *
- * @author jobob
- * @since 2020-04-05
+ * @author taotao
+ * @since 2020-08-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@TableName("sys_rule")
-public class SysRule extends Model<SysRule> {
+@TableName("sys_rule_user")
+public class SysRuleUser extends Model<SysRuleUser> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * id
-     */
-    @TableId("r_id")
+    @TableId("id")
+    private String id;
+
+    @TableField("r_id")
     private String rId;
 
-    /**
-     * 角色名称
-     */
-    @TableField("r_name")
-    private String rName;
-
-    /**
-     * 角色描述
-     */
-    @TableField("r_description")
-    private String rDescription;
-
-    /**
-     * 角色状态
-     */
-    @TableField("r_state_cd")
-    private Integer rStateCd;
+    @TableField("u_id")
+    private String uId;
 
     /**
      * 删除状态
@@ -81,10 +65,10 @@ public class SysRule extends Model<SysRule> {
     @TableField("update_id")
     private String updateId;
 
-
     @Override
     protected Serializable pkVal() {
-        return this.rId;
+        return this.id;
     }
+
 
 }

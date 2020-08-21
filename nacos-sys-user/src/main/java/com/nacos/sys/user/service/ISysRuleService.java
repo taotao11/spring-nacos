@@ -1,6 +1,7 @@
 package com.nacos.sys.user.service;
 
-import com.baomidou.mybatisplus.service.IService;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.nacos.sys.user.entity.SysRule;
 
 /**

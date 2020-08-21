@@ -1,14 +1,15 @@
 package com.nacos.sys.user.utils;
 
-import com.baomidou.mybatisplus.exceptions.MybatisPlusException;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import com.baomidou.mybatisplus.toolkit.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,50 +19,6 @@ import java.util.Scanner;
  * 小混蛋
  */
 public class CodeGenerator {
-
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/nacos_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false";
-    public static final String USER_NAME = "root";
-    public static final String PASSWORD = "123456";
-    public static final String DRIVER = "com.mysql.jdbc.Driver";
-    public static final String AUTHOR = "TianTao";
-    //生成的文件输出到哪个目录
-    public static final String OUTPUT_FILE = "D:\\codeGen";
-    //包名，会按照com/example/demo这种形式生成类
-    public static final String PACKAGE = "com.example.demo";
-    //TODO 更多配置请参考http://mp.baomidou.com/#/generate-code
-
-    public void generateByTables(boolean serviceNameStartWithI, String... tableNames) {
-        GlobalConfig config = new GlobalConfig();
-        DataSourceConfig dataSourceConfig = new DataSourceConfig();
-        dataSourceConfig.setDbType(DbType.MYSQL)
-                .setUrl(DB_URL)
-                .setUsername(USER_NAME)
-                .setPassword(PASSWORD)
-                .setDriverName(DRIVER);
-        StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig
-                .setCapitalMode(true)
-                .setEntityLombokModel(false)
-                .setDbColumnUnderline(true)
-                .setNaming(NamingStrategy.underline_to_camel)
-                .setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
-        config.setActiveRecord(false)
-                .setAuthor(AUTHOR)
-                .setOutputDir(OUTPUT_FILE)
-                .setFileOverride(true);
-        if (!serviceNameStartWithI) {
-            config.setServiceName("%sService");
-        }
-        new AutoGenerator().setGlobalConfig(config)
-                .setDataSource(dataSourceConfig)
-                .setStrategy(strategyConfig)
-                .setPackageInfo(
-                        new PackageConfig()
-                                .setParent(PACKAGE)
-                                .setController("controller")
-                                .setEntity("entity")
-                ).execute();
-    }
 
 
     /**
@@ -90,25 +47,25 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("jobob");
+        gc.setOutputDir(projectPath + "/nacos-sys-user/src/main/java");
+        gc.setAuthor("taotao");
         gc.setOpen(false);
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/nacos_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false");
+        dsc.setUrl("jdbc:mysql://192.168.137.128:3306/nacos_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("密码");
+        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.baomidou.ant");
+        pc.setParent("com.nacos.sys");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
@@ -131,7 +88,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
+                return projectPath + "/nacos-sys-user/src/main/resources/mapper/" + pc.getModuleName()
                         + "/" + tableInfo.getEntityName() + "Mapper";
             }
         });

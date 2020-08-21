@@ -1,7 +1,9 @@
 package com.nacos.sys.user.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.nacos.sys.user.entity.SysRule;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.nacos.sys.user.entity.SysRule;
  * @since 2020-04-05
  */
 public interface SysRuleMapper extends BaseMapper<SysRule> {
+
+    public List<SysRule> selectRuleByUid(String uid);
 
 }

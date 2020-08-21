@@ -2,13 +2,17 @@ server:
   port: 8005
 #表明使用Druid连接池
 spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
 #mysql数据库连接信息配置
 #mysql驱动
     driverClassName: com.mysql.jdbc.Driver
 #数据库连接信息
-    url: jdbc:mysql://localhost:3306/nacos_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://192.168.137.128:3306/nacos_user?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
 #数据库用户名
     username: root
 #数据库密码
@@ -63,5 +67,5 @@ mybatis-plus:
       # 字段策略 IGNORED:"忽略判断",not_null:"非 NULL 判断"),not_empty:"非空判断"
       field-strategy: not_empty
       #逻辑删除配置
-      logic-delete-value: -1
+      logic-delete-value: 1
       logic-not-delete-value: 0

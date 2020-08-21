@@ -1,6 +1,8 @@
 package com.nacos.sys.user.service.impl;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;import com.nacos.sys.user.entity.SysRule;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.nacos.sys.user.entity.SysRule;
 import com.nacos.sys.user.mapper.SysRuleMapper;
 import com.nacos.sys.user.service.ISysRuleService;
 import org.springframework.stereotype.Service;
